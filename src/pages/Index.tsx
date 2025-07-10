@@ -1,12 +1,392 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from "react";
+import { ArrowRight, Play, Star, Users, Zap, Palette, Code, Sparkles, ChevronDown, Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Index = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(0);
+
+  const services = [
+    {
+      icon: <Palette className="w-8 h-8" />,
+      title: "Brand Design",
+      description: "Crafting memorable brand identities that resonate with your audience and stand the test of time.",
+      color: "from-coral-500 to-coral-600"
+    },
+    {
+      icon: <Code className="w-8 h-8" />,
+      title: "Web Development",
+      description: "Building responsive, fast, and beautiful websites that convert visitors into customers.",
+      color: "from-ocean-500 to-ocean-600"
+    },
+    {
+      icon: <Zap className="w-8 h-8" />,
+      title: "Digital Strategy",
+      description: "Creating comprehensive digital strategies that drive growth and maximize your online presence.",
+      color: "from-gold-500 to-gold-600"
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "Creative Consulting",
+      description: "Providing expert guidance to transform your creative vision into reality with measurable results.",
+      color: "from-coral-400 to-ocean-500"
+    }
+  ];
+
+  const portfolio = [
+    {
+      title: "TechFlow Dashboard",
+      category: "UI/UX Design",
+      image: "/placeholder.svg",
+      description: "Modern dashboard interface for data visualization"
+    },
+    {
+      title: "EcoLife Branding",
+      category: "Brand Identity",
+      image: "/placeholder.svg",
+      description: "Complete brand identity for sustainable living"
+    },
+    {
+      title: "CloudSync Platform",
+      category: "Web Development",
+      image: "/placeholder.svg",
+      description: "Full-stack web application for team collaboration"
+    },
+    {
+      title: "Mindful Mobile App",
+      category: "Mobile Design",
+      image: "/placeholder.svg",
+      description: "Meditation and wellness mobile application"
+    },
+    {
+      title: "RetailHub E-commerce",
+      category: "E-commerce",
+      image: "/placeholder.svg",
+      description: "Modern e-commerce platform with advanced features"
+    },
+    {
+      title: "ArtSpace Gallery",
+      category: "Web Design",
+      image: "/placeholder.svg",
+      description: "Contemporary art gallery website"
+    }
+  ];
+
+  const stats = [
+    { number: "150+", label: "Projects Completed" },
+    { number: "50+", label: "Happy Clients" },
+    { number: "5+", label: "Years Experience" },
+    { number: "24/7", label: "Support Available" }
+  ];
+
+  const team = [
+    {
+      name: "Alex Chen",
+      role: "Creative Director",
+      image: "/placeholder.svg",
+      expertise: "Brand Strategy & Visual Design"
+    },
+    {
+      name: "Sarah Johnson",
+      role: "Lead Developer",
+      image: "/placeholder.svg",
+      expertise: "Full-Stack Development"
+    },
+    {
+      name: "Marcus Rodriguez",
+      role: "UX Designer",
+      image: "/placeholder.svg",
+      expertise: "User Experience & Research"
+    },
+    {
+      name: "Emily Zhang",
+      role: "Project Manager",
+      image: "/placeholder.svg",
+      expertise: "Strategic Planning & Execution"
+    }
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll('[data-section]');
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach((section, index) => {
+        const sectionTop = (section as HTMLElement).offsetTop;
+        const sectionHeight = (section as HTMLElement).offsetHeight;
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          setActiveSection(index);
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-ocean-50 via-white to-coral-50">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-ocean-100 z-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-coral-500 to-ocean-600 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <span className="text-xl font-bold text-ocean-900">Creative Oasis</span>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#home" className="text-ocean-700 hover:text-coral-600 transition-colors">Home</a>
+              <a href="#services" className="text-ocean-700 hover:text-coral-600 transition-colors">Services</a>
+              <a href="#portfolio" className="text-ocean-700 hover:text-coral-600 transition-colors">Portfolio</a>
+              <a href="#team" className="text-ocean-700 hover:text-coral-600 transition-colors">Team</a>
+              <Button className="bg-coral-600 hover:bg-coral-700 text-white">
+                Get Started
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-ocean-100 transition-colors"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Navigation */}
+          {isMenuOpen && (
+            <div className="md:hidden border-t border-ocean-100 bg-white/95 backdrop-blur-md">
+              <div className="px-4 py-6 space-y-4">
+                <a href="#home" className="block text-ocean-700 hover:text-coral-600 transition-colors">Home</a>
+                <a href="#services" className="block text-ocean-700 hover:text-coral-600 transition-colors">Services</a>
+                <a href="#portfolio" className="block text-ocean-700 hover:text-coral-600 transition-colors">Portfolio</a>
+                <a href="#team" className="block text-ocean-700 hover:text-coral-600 transition-colors">Team</a>
+                <Button className="w-full bg-coral-600 hover:bg-coral-700 text-white">
+                  Get Started
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section id="home" data-section className="pt-20 pb-16 px-4 sm:px-6 lg:px-8" style={{ minHeight: '100vh' }}>
+        <div className="container mx-auto text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-ocean-900 mb-6 leading-tight">
+              Creative Solutions for
+              <span className="text-transparent bg-gradient-to-r from-coral-600 to-gold-600 bg-clip-text">
+                {" "}Digital Excellence
+              </span>
+            </h1>
+            <p className="text-lg sm:text-xl text-ocean-600 mb-8 max-w-2xl mx-auto">
+              We craft extraordinary digital experiences that captivate audiences and drive results. 
+              From innovative designs to powerful development, we bring your vision to life.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="bg-coral-600 hover:bg-coral-700 text-white px-8 py-3">
+                Start Your Project
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-ocean-300 text-ocean-700 hover:bg-ocean-50 px-8 py-3">
+                <Play className="w-5 h-5 mr-2" />
+                Watch Our Story
+              </Button>
+            </div>
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 max-w-4xl mx-auto">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl sm:text-4xl font-bold text-ocean-900 mb-2">{stat.number}</div>
+                <div className="text-ocean-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 animate-bounce">
+            <ChevronDown className="w-8 h-8 text-ocean-400 mx-auto" />
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section - This replicates the LG breakpoint card layout */}
+      <section id="services" data-section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ocean-900 mb-4">
+              Our Services
+            </h2>
+            <p className="text-lg text-ocean-600 max-w-2xl mx-auto">
+              We offer comprehensive digital solutions tailored to your unique needs and goals.
+            </p>
+          </div>
+
+          {/* LG Breakpoint Layout - Maintaining exact spacing and card sizes */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-0 shadow-md bg-gradient-to-br from-white to-ocean-50/30">
+                <CardContent className="p-6 lg:p-8">
+                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <div className="text-white">
+                      {service.icon}
+                    </div>
+                  </div>
+                  <h3 className="text-xl font-semibold text-ocean-900 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-ocean-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Section - Creative Grid Layout */}
+      <section id="portfolio" data-section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-ocean-50 to-coral-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ocean-900 mb-4">
+              Featured Work
+            </h2>
+            <p className="text-lg text-ocean-600 max-w-2xl mx-auto">
+              Explore our latest projects and see how we transform ideas into exceptional digital experiences.
+            </p>
+          </div>
+
+          {/* Responsive Portfolio Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {portfolio.map((project, index) => (
+              <Card key={index} className="group overflow-hidden hover:shadow-2xl transition-all duration-500 border-0 shadow-lg">
+                <div className="aspect-video bg-gradient-to-br from-ocean-100 to-coral-100 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-coral-500/20 to-ocean-500/20 group-hover:opacity-80 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <Play className="w-6 h-6 text-ocean-600" />
+                    </div>
+                  </div>
+                </div>
+                <CardContent className="p-6">
+                  <div className="text-sm text-coral-600 font-medium mb-2">{project.category}</div>
+                  <h3 className="text-xl font-semibold text-ocean-900 mb-2">{project.title}</h3>
+                  <p className="text-ocean-600">{project.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section id="team" data-section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ocean-900 mb-4">
+              Meet Our Team
+            </h2>
+            <p className="text-lg text-ocean-600 max-w-2xl mx-auto">
+              Talented professionals dedicated to bringing your creative vision to life.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {team.map((member, index) => (
+              <Card key={index} className="text-center hover:shadow-xl transition-all duration-300 border-0 shadow-md">
+                <CardContent className="p-6">
+                  <div className="w-24 h-24 bg-gradient-to-br from-coral-400 to-ocean-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <Users className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-ocean-900 mb-1">{member.name}</h3>
+                  <div className="text-coral-600 font-medium mb-2">{member.role}</div>
+                  <p className="text-sm text-ocean-600">{member.expertise}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-ocean-900 to-ocean-700">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+            Ready to Create Something Amazing?
+          </h2>
+          <p className="text-lg text-ocean-200 mb-8 max-w-2xl mx-auto">
+            Let's collaborate and bring your vision to life with innovative design and development solutions.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-coral-600 hover:bg-coral-700 text-white px-8 py-3">
+              Start Your Project
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-ocean-900 px-8 py-3">
+              Get In Touch
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-ocean-950 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-coral-500 to-ocean-600 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-lg font-bold">Creative Oasis</span>
+              </div>
+              <p className="text-ocean-300">
+                Crafting digital experiences that inspire and engage.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Services</h4>
+              <ul className="space-y-2 text-ocean-300">
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Brand Design</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Web Development</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Digital Strategy</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Consulting</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-ocean-300">
+                <li><a href="#" className="hover:text-coral-400 transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Team</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Careers</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Connect</h4>
+              <ul className="space-y-2 text-ocean-300">
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Twitter</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">LinkedIn</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Instagram</a></li>
+                <li><a href="#" className="hover:text-coral-400 transition-colors">Dribbble</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-ocean-800 mt-12 pt-8 text-center text-ocean-400">
+            <p>&copy; 2024 Creative Oasis. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
