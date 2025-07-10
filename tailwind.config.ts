@@ -1,4 +1,5 @@
 
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -63,45 +64,45 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Creative Oasis Color System
-				ocean: {
-					50: '#f0f9ff',
-					100: '#e0f2fe',
-					200: '#bae6fd',
-					300: '#7dd3fc',
-					400: '#38bdf8',
-					500: '#0ea5e9',
-					600: '#0284c7',
-					700: '#0369a1',
-					800: '#075985',
-					900: '#0c4a6e',
-					950: '#082f49'
+				// VibeStudio Color System
+				violet: {
+					50: 'hsl(253, 80%, 97%)',
+					100: 'hsl(253, 80%, 93%)',
+					200: 'hsl(253, 80%, 87%)',
+					300: 'hsl(253, 80%, 75%)',
+					400: 'hsl(253, 80%, 63%)',
+					500: 'hsl(253, 80%, 55%)', // Primary - #8b5cf6
+					600: 'hsl(253, 80%, 47%)',
+					700: 'hsl(253, 80%, 39%)',
+					800: 'hsl(253, 80%, 31%)',
+					900: 'hsl(253, 80%, 23%)',
+					950: 'hsl(253, 80%, 15%)'
 				},
-				coral: {
-					50: '#fef2f2',
-					100: '#fee2e2',
-					200: '#fecaca',
-					300: '#fca5a5',
-					400: '#f87171',
-					500: '#ef4444',
-					600: '#dc2626',
-					700: '#b91c1c',
-					800: '#991b1b',
-					900: '#7f1d1d',
-					950: '#450a0a'
+				mint: {
+					50: 'hsl(158, 64%, 97%)',
+					100: 'hsl(158, 64%, 93%)',
+					200: 'hsl(158, 64%, 85%)',
+					300: 'hsl(158, 64%, 73%)',
+					400: 'hsl(158, 64%, 59%)',
+					500: 'hsl(158, 64%, 51%)', // Secondary - #10b981
+					600: 'hsl(158, 64%, 41%)',
+					700: 'hsl(158, 64%, 33%)',
+					800: 'hsl(158, 64%, 26%)',
+					900: 'hsl(158, 64%, 22%)',
+					950: 'hsl(158, 64%, 12%)'
 				},
-				gold: {
-					50: '#fffbeb',
-					100: '#fef3c7',
-					200: '#fde68a',
-					300: '#fcd34d',
-					400: '#fbbf24',
-					500: '#f59e0b',
-					600: '#d97706',
-					700: '#b45309',
-					800: '#92400e',
-					900: '#78350f',
-					950: '#451a03'
+				flame: {
+					50: 'hsl(20, 95%, 97%)',
+					100: 'hsl(20, 95%, 93%)',
+					200: 'hsl(20, 95%, 85%)',
+					300: 'hsl(20, 95%, 73%)',
+					400: 'hsl(20, 95%, 61%)',
+					500: 'hsl(20, 95%, 55%)', // Accent - #f97316
+					600: 'hsl(20, 95%, 47%)',
+					700: 'hsl(20, 95%, 39%)',
+					800: 'hsl(20, 95%, 31%)',
+					900: 'hsl(20, 95%, 25%)',
+					950: 'hsl(20, 95%, 15%)'
 				}
 			},
 			borderRadius: {
@@ -145,15 +146,25 @@ export default {
 						transform: 'scale(1)',
 						opacity: '1'
 					}
+				},
+				'float': {
+					'0%, 100%': {
+						transform: 'translateY(0px)'
+					},
+					'50%': {
+						transform: 'translateY(-10px)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.3s ease-out',
-				'scale-in': 'scale-in 0.2s ease-out'
+				'scale-in': 'scale-in 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite'
 			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
